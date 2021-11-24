@@ -1,0 +1,8 @@
+{
+  "usercounter": "[cspacer0]x User Online %onlineuser%/%maxuser%",
+  "afkmovemessage": "Du wurdest in den AFK Channel gezogen!",
+  "supporterinfo": "Der User %user% ist dem Support beigetreten",
+  "supporterjoinsupport": "Du darftst den Support nicht beigetreten",
+  "supportnotification": "Es wurden %counter% Supporter benachrichtig",
+  "welcomemessage": "Willkommen auf den Server"
+}

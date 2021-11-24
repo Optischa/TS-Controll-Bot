@@ -1,0 +1,16 @@
+{
+  "host": "127.0.0.1",
+  "queryport": 10011,
+  "name": "Bot",
+  "configs": {
+    "usercount": true,
+    "usercountchannelid": 1,
+    "afkmoved": true,
+    "afktime": 60,
+    "afkchannelid": 1,
+    "supportsystem": true,
+    "supportchannelid": 2,
+    "supportgroupsid": [1,6],
+    "welcomemessage": true
+  }
+}
