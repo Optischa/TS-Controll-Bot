@@ -1,4 +1,4 @@
-package de.optischa.teamspeak.helper;
+package de.optischa.teamspeak.function;
 
 import com.github.theholywaffle.teamspeak3.api.ChannelProperty;
 import de.optischa.teamspeak.Bot;
@@ -6,7 +6,7 @@ import de.optischa.teamspeak.utils.Config;
 import de.optischa.teamspeak.utils.Message;
 import org.json.simple.JSONObject;
 
-public class EditChannelHelper {
+public class EditChannelFunction {
 
     public void userCounter(Message message, Config config, Bot bot) {
         JSONObject jsonObject = (JSONObject) config.getConfig().get("configs");

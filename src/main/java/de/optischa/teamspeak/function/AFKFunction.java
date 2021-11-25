@@ -1,4 +1,4 @@
-package de.optischa.teamspeak.helper;
+package de.optischa.teamspeak.function;
 
 import com.github.theholywaffle.teamspeak3.api.wrapper.Client;
 import de.optischa.teamspeak.Bot;
@@ -11,7 +11,7 @@ import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class AFKHelper {
+public class AFKFunction {
 
     private final Map<String, Long> afkUser = new HashMap<>();
     private final Map<String, Boolean> movedUser = new HashMap<>();
@@ -19,7 +19,7 @@ public class AFKHelper {
 
     private final Bot bot;
 
-    public AFKHelper(Bot bot) {
+    public AFKFunction(Bot bot) {
         this.bot = bot;
     }
 

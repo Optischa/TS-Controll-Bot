@@ -1,13 +1,13 @@
-package de.optischa.teamspeak.helper;
+package de.optischa.teamspeak.function;
 
 import de.optischa.teamspeak.Bot;
 import de.optischa.teamspeak.utils.Config;
 import de.optischa.teamspeak.utils.Message;
 import org.json.simple.JSONObject;
 
-public class WelcomeHelper {
+public class WelcomeFunction {
 
-    public WelcomeHelper(Bot bot, int clientId) {
+    public WelcomeFunction(Bot bot, int clientId) {
         Config config = new Config();
         JSONObject json = (JSONObject) config.getConfig().get("configs");
         Message message = new Message();

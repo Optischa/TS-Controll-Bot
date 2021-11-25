@@ -3,8 +3,9 @@ package de.optischa.teamspeak.event;
 import com.github.theholywaffle.teamspeak3.api.event.ClientJoinEvent;
 import com.github.theholywaffle.teamspeak3.api.event.TS3EventAdapter;
 import de.optischa.teamspeak.Bot;
-import de.optischa.teamspeak.helper.EditChannelHelper;
-import de.optischa.teamspeak.helper.WelcomeHelper;
+import de.optischa.teamspeak.function.AntiRecordingFunction;
+import de.optischa.teamspeak.function.EditChannelFunction;
+import de.optischa.teamspeak.function.WelcomeFunction;
 import de.optischa.teamspeak.utils.Config;
 import de.optischa.teamspeak.utils.Message;
 
@@ -22,8 +23,9 @@ public class ClientJoin extends TS3EventAdapter {
 
     @Override
     public void onClientJoin(ClientJoinEvent clientJoinEvent) {
-        new EditChannelHelper().userCounter(message, config, bot);
-        new WelcomeHelper(bot, clientJoinEvent.getClientId());
+        new EditChannelFunction().userCounter(message, config, bot);
+        new WelcomeFunction(bot, clientJoinEvent.getClientId());
+        new AntiRecordingFunction().antiRecording(clientJoinEvent.isClientRecording(), config, bot.getTs3Api(), clientJoinEvent.getClientId(), message);
     }
 
 }

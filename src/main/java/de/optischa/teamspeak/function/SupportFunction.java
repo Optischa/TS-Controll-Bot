@@ -1,4 +1,4 @@
-package de.optischa.teamspeak.helper;
+package de.optischa.teamspeak.function;
 
 import com.github.theholywaffle.teamspeak3.api.wrapper.Client;
 import de.optischa.teamspeak.Bot;
@@ -10,11 +10,11 @@ import org.json.simple.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SupportHelper {
+public class SupportFunction {
 
     private final Bot bot;
 
-    public SupportHelper(Bot bot) {
+    public SupportFunction(Bot bot) {
         this.bot = bot;
     }
 
