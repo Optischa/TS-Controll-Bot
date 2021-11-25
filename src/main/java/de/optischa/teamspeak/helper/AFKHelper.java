@@ -36,21 +36,21 @@ public class AFKHelper {
                         if (client.isServerQueryClient()) {
                             continue;
                         }
-                        if (!(client.isAway() || client.isInputMuted() || client.isOutputMuted())) {
-                            if (afkUser.containsKey(client.getUniqueIdentifier())) {
-                                afkUser.remove(client.getUniqueIdentifier());
-                            }
-                            if (movedUser.containsKey(client.getUniqueIdentifier())) {
-                                if (movedUser.get(client.getUniqueIdentifier())) {
-                                    bot.getTs3Api().moveClient(client.getId(), channelUser.get(client.getUniqueIdentifier()));
-                                    movedUser.remove(client.getUniqueIdentifier());
-                                    channelUser.remove(client.getUniqueIdentifier());
+                        if (movedUser.containsKey(client.getUniqueIdentifier())) {
+                            if (!(client.isAway() || client.isInputMuted() || client.isOutputMuted())) {
+                                if (afkUser.containsKey(client.getUniqueIdentifier())) {
+                                    afkUser.remove(client.getUniqueIdentifier());
+                                }
+                                if (movedUser.containsKey(client.getUniqueIdentifier())) {
+                                    if (movedUser.get(client.getUniqueIdentifier())) {
+                                        bot.getTs3Api().moveClient(client.getId(), channelUser.get(client.getUniqueIdentifier()));
+                                        movedUser.remove(client.getUniqueIdentifier());
+                                        channelUser.remove(client.getUniqueIdentifier());
+                                    }
                                 }
                             }
-                            continue;
-                        }
-                        if (client.isAway() || client.isInputMuted() || client.isOutputMuted()) {
-                            if (movedUser.containsKey(client.getUniqueIdentifier())) {
+                        } else {
+                            if (client.isAway() || client.isInputMuted() || client.isOutputMuted()) {
                                 if (!afkUser.containsKey(client.getUniqueIdentifier())) {
                                     afkUser.put(client.getUniqueIdentifier(), System.currentTimeMillis());
                                 } else {
@@ -63,6 +63,10 @@ public class AFKHelper {
                                         bot.getTs3Api().sendPrivateMessage(client.getId(), (String) message.getMessages().get("afkmovemessage"));
                                         bot.getTs3Api().moveClient(client.getId(), Integer.parseInt(String.valueOf(json.get("afkchannelid"))));
                                     }
+                                }
+                            } else {
+                                if(afkUser.containsKey(client.getUniqueIdentifier())) {
+                                    afkUser.remove(client.getUniqueIdentifier());
                                 }
                             }
                         }

@@ -46,7 +46,7 @@ public class Bot {
             ts3Query.connect();
         }
 
-        ts3Api.login("serveradmin", "Zb3jo6b9");
+        ts3Api.login((String) config.getConfig().get("username"), (String) config.getConfig().get("password"));
         ts3Api.selectVirtualServerById(1);
         ts3Api.setNickname((String) config.getConfig().get("name"));
 
