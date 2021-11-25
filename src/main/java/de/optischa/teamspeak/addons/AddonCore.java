@@ -1,6 +1,7 @@
 package de.optischa.teamspeak.addons;
 
 import de.optischa.teamspeak.addons.core.AddonManager;
+import de.optischa.teamspeak.utils.BotLogger;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
@@ -12,12 +13,12 @@ public class AddonCore {
 	
 	private static final File ADDON_FOLDER = new File("addons");
 	@Getter
-	private static AddonLogger logger;
+	private static BotLogger logger;
 	@Getter
 	private static AddonManager addonManager;
 	
 	public void enable() {
-		logger = new AddonLogger();
+		logger = new BotLogger();
 		
 		if(!getAddonFolder().exists())
 			getAddonFolder().mkdirs();

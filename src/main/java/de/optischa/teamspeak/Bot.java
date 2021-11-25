@@ -4,17 +4,29 @@ import com.github.theholywaffle.teamspeak3.TS3Api;
 import com.github.theholywaffle.teamspeak3.TS3Config;
 import com.github.theholywaffle.teamspeak3.TS3Query;
 import de.optischa.teamspeak.addons.AddonCore;
-import de.optischa.teamspeak.event.Events;
 import de.optischa.teamspeak.helper.AFKHelper;
+import de.optischa.teamspeak.manager.CommandManager;
+import de.optischa.teamspeak.manager.ConsoleManager;
+import de.optischa.teamspeak.manager.EventRegisterManager;
 import de.optischa.teamspeak.utils.Config;
+import lombok.Getter;
 
 public class Bot {
 
+    @Getter
     private static Bot bot;
+    @Getter
     private final TS3Config ts3Config;
+    @Getter
     private final TS3Query ts3Query;
+    @Getter
     private final TS3Api ts3Api;
+    @Getter
     private final Config config;
+    @Getter
+    private final CommandManager commandManager;
+    @Getter
+    private final ConsoleManager consoleManager;
 
     public static void main(String[] args) {
         new Bot();
@@ -25,6 +37,8 @@ public class Bot {
         ts3Config = new TS3Config();
         ts3Query = new TS3Query(ts3Config);
         ts3Api = new TS3Api(ts3Query.getAsyncApi());
+        commandManager = new CommandManager();
+        consoleManager = new ConsoleManager();
         config = new Config();
 
         ts3Config.setHost((String) config.getConfig().get("host")).setEnableCommunicationsLogging(true).setFloodRate(TS3Query.FloodRate.UNLIMITED);
@@ -36,30 +50,13 @@ public class Bot {
         ts3Api.selectVirtualServerById(1);
         ts3Api.setNickname((String) config.getConfig().get("name"));
 
+        getConsoleManager().startConsole();
+
         new AddonCore().enable();
-
-        ts3Api.registerAllEvents();
-        ts3Api.addTS3Listeners(new Events(getBot()));
+        new EventRegisterManager(ts3Api).registerEvents();
+        getCommandManager().loadCommands();
+        getConsoleManager().loadCommands();
         new AFKHelper(getBot()).start();
-    }
-
-    public static Bot getBot() {
-        return bot;
-    }
-
-    public TS3Api getTs3Api() {
-        return ts3Api;
-    }
-
-    public TS3Config getTs3Config() {
-        return ts3Config;
-    }
-
-    public TS3Query getTs3Query() {
-        return ts3Query;
-    }
-
-    public Config getConfig() {
-        return config;
+        getConsoleManager().startCommands();
     }
 }

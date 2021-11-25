@@ -2,6 +2,7 @@
   "host": "127.0.0.1",
   "queryport": 10011,
   "name": "Bot",
+  "prefix": "!",
   "configs": {
     "usercount": true,
     "usercountchannelid": 1,

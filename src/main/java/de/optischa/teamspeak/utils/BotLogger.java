@@ -1,11 +1,11 @@
-package de.optischa.teamspeak.addons;
+package de.optischa.teamspeak.utils;
 
 import lombok.RequiredArgsConstructor;
 
 import java.util.logging.Level;
 
 @RequiredArgsConstructor
-public class AddonLogger {
+public class BotLogger {
 	
 	private static final String PREFIX = "[TeamSpeakBot] ";
 	private static final String INFO = "[INFO]";
@@ -13,12 +13,12 @@ public class AddonLogger {
 	
 	public void log(Level level, String msg) {
 		StringBuilder builder = new StringBuilder();
-		builder.append(AddonLogger.PREFIX);
+		builder.append(BotLogger.PREFIX);
 		
 		if(level == Level.INFO)
-			builder.append(AddonLogger.INFO);
+			builder.append(BotLogger.INFO);
 		else if(level == Level.SEVERE)
-			builder.append(AddonLogger.ERROR);
+			builder.append(BotLogger.ERROR);
 		
 		builder.append(" ").append(msg);
 		
