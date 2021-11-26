@@ -4,7 +4,7 @@
   "name": "Bot",
   "prefix": "!",
   "username": "serveradmin",
-  "password": "eRr6zDPR",
+  "password": "Zb3jo6b9",
   "configs": {
     "usercount": true,
     "usercountchannelid": 1,
@@ -15,6 +15,10 @@
     "supportchannelid": 2,
     "supportgroupsid": [1,6],
     "welcomemessage": true,
-    "antirecord": true
+    "antirecord": true,
+    "kickclientname": false,
+    "backlistname": ["Optischa"],
+    "renamechannelname": true,
+    "backlistchannel": ["Optischa"]
   }
 }

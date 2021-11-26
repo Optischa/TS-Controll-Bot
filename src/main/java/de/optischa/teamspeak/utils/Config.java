@@ -43,6 +43,8 @@ public class Config {
         builder.add("host", "127.0.0.1");
         builder.add("queryport", 10011);
         builder.add("name", "Bot");
+        builder.add("username", "serveradmin");
+        builder.add("password", "");
 
         JsonObjectBuilder configArrayBuilder = Json.createObjectBuilder();
 
@@ -51,11 +53,21 @@ public class Config {
         configArrayBuilder.add("afkmoved", false);
         configArrayBuilder.add("afktime", 60);
         configArrayBuilder.add("afkchannelid", 1);
-
         JsonArrayBuilder supportgroupid = Json.createArrayBuilder();
         supportgroupid.add(1);
-
         configArrayBuilder.add("supportgroupsid", supportgroupid);
+        configArrayBuilder.add("supportsystem", false);
+        configArrayBuilder.add("supportchannelid", 1);
+        configArrayBuilder.add("welcomemessage", false);
+        configArrayBuilder.add("antirecord", false);
+        configArrayBuilder.add("kickclientname", false);
+        JsonArrayBuilder backlistname = Json.createArrayBuilder();
+        supportgroupid.add("");
+        configArrayBuilder.add("backlistname", backlistname);
+        configArrayBuilder.add("renamechannelname", false);
+        JsonArrayBuilder backlistchannel = Json.createArrayBuilder();
+        supportgroupid.add("");
+        configArrayBuilder.add("backlistchannel", backlistchannel);
 
         builder.add("configs", configArrayBuilder);
         JsonObject jo = builder.build();

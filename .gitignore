@@ -1,3 +1,6 @@
 # Project exclude paths
 /target/
 .idea
+/addons/
+config.json
+message.json

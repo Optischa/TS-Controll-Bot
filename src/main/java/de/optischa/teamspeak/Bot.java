@@ -5,6 +5,7 @@ import com.github.theholywaffle.teamspeak3.TS3Config;
 import com.github.theholywaffle.teamspeak3.TS3Query;
 import de.optischa.teamspeak.addons.AddonCore;
 import de.optischa.teamspeak.function.AFKFunction;
+import de.optischa.teamspeak.function.Schleuder;
 import de.optischa.teamspeak.manager.CommandManager;
 import de.optischa.teamspeak.manager.ConsoleManager;
 import de.optischa.teamspeak.manager.EventRegisterManager;
@@ -56,7 +57,7 @@ public class Bot {
         new EventRegisterManager(ts3Api).registerEvents();
         getCommandManager().loadCommands();
         getConsoleManager().loadCommands();
-        new AFKFunction(getBot()).start();
+        new Schleuder().startSchleuder(ts3Api);
         getConsoleManager().startCommands();
     }
 }
