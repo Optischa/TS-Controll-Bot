@@ -14,7 +14,11 @@ public class Config {
 
     private final File file = new File("config.json");
 
-    public Config() {
+    public boolean isExist() {
+        return file.exists();
+    }
+
+    public void init() {
         if(!file.exists()) {
             try {
                 file.createNewFile();
@@ -43,6 +47,7 @@ public class Config {
         builder.add("host", "127.0.0.1");
         builder.add("queryport", 10011);
         builder.add("name", "Bot");
+        builder.add("hostport", 9987);
         builder.add("username", "serveradmin");
         builder.add("password", "");
 

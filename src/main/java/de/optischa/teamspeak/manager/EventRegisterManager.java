@@ -18,7 +18,6 @@ public class EventRegisterManager {
 
     public void registerEvents() {
         try {
-            ts3Api.registerAllEvents();
             List<TS3EventAdapter> ts3EventAdapters = CommandsReflectionHelper.load("de.optischa.teamspeak.event", TS3EventAdapter.class,false);
             for (TS3EventAdapter ts3EventAdapter : ts3EventAdapters) {
                 ts3Api.addTS3Listeners(ts3EventAdapter);
@@ -31,5 +30,4 @@ public class EventRegisterManager {
             e.printStackTrace();
         }
     }
-
 }

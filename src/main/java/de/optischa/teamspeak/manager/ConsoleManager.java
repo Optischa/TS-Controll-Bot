@@ -4,6 +4,7 @@ import de.optischa.teamspeak.commands.chat.ChatCommand;
 import de.optischa.teamspeak.commands.console.ConsoleCommand;
 import de.optischa.teamspeak.helper.CommandsReflectionHelper;
 import de.optischa.teamspeak.utils.BotLogger;
+import de.optischa.teamspeak.utils.Config;
 import lombok.Getter;
 
 import java.io.BufferedReader;
@@ -87,4 +88,18 @@ public class ConsoleManager {
         }
     }
 
+    public void startFurnishing(Config config) {
+        System.out.println(createQuestion("Das ist ein Test"));
+    }
+
+    private String createQuestion(String question) {
+        System.out.print("> " + question + ": ");
+        BufferedReader inputReader = new BufferedReader(new InputStreamReader(System.in));
+        String input = "";
+        try {
+            input = inputReader.readLine();
+        } catch (IOException ignored) {
+        }
+        return input;
+    }
 }
