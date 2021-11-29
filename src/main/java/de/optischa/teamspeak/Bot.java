@@ -4,8 +4,8 @@ import com.github.theholywaffle.teamspeak3.TS3Api;
 import com.github.theholywaffle.teamspeak3.TS3Config;
 import com.github.theholywaffle.teamspeak3.TS3Query;
 import com.github.theholywaffle.teamspeak3.api.exception.TS3CommandFailedException;
+import com.github.theholywaffle.teamspeak3.api.exception.TS3ConnectionFailedException;
 import de.optischa.teamspeak.addons.AddonCore;
-import de.optischa.teamspeak.function.AFKFunction;
 import de.optischa.teamspeak.function.Schleuder;
 import de.optischa.teamspeak.manager.CommandManager;
 import de.optischa.teamspeak.manager.ConsoleManager;
@@ -45,7 +45,9 @@ public class Bot {
         commandManager = new CommandManager();
         consoleManager = new ConsoleManager();
         config = new Config();
+        BotLogger logger = new BotLogger();
 
+        logger.createFile();
 
         getConsoleManager().startConsole();
         if(!config.isExist()) {
@@ -55,19 +57,30 @@ public class Bot {
 
         ts3Config.setHost((String) config.getConfig().get("host")).setEnableCommunicationsLogging(true).setFloodRate(TS3Query.FloodRate.UNLIMITED);
         if(!ts3Query.isConnected()) {
-            ts3Query.connect();
+            try {
+                ts3Query.connect();
+            } catch (TS3ConnectionFailedException e) {
+                logger.log(Level.WARNING, "No connection to Server with Adress " + config.getConfig().get("host"));
+            }
         }
 
-        ts3Api.login((String) config.getConfig().get("username"), (String) config.getConfig().get("password"));
+        try {
+            ts3Api.login((String) config.getConfig().get("username"), (String) config.getConfig().get("password"));
+        } catch (TS3CommandFailedException e) {
+            logger.log(Level.WARNING, "Login has a error. Please check the config");
+        }
         ts3Api.selectVirtualServerByPort(Integer.parseInt(String.valueOf(config.getConfig().get("hostport"))));
-        ts3Api.setNickname((String) config.getConfig().get("name"));
+        try {
+            ts3Api.setNickname((String) config.getConfig().get("name"));
+        } catch (TS3CommandFailedException e) {
+            logger.log(Level.SEVERE, e.getMessage());
+        }
 
         new AddonCore().enable();
         try {
             ts3Api.registerAllEvents();
             new EventRegisterManager(ts3Api).registerEvents();
         } catch (TS3CommandFailedException e) {
-            BotLogger logger = new BotLogger();
             logger.log(Level.WARNING, e.getMessage());
         }
         getCommandManager().loadCommands();

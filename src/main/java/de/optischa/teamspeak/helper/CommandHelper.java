@@ -17,7 +17,7 @@ public class CommandHelper {
         if (command != null) {
             boolean called = command.isCalled(cmd.args);
             if (!called) {
-                command.action(cmd.args);
+                command.action(cmd.args, client);
             }
             command.executed(called);
         }

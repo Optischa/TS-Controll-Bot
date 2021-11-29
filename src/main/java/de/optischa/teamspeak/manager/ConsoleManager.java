@@ -6,10 +6,9 @@ import de.optischa.teamspeak.helper.CommandsReflectionHelper;
 import de.optischa.teamspeak.utils.BotLogger;
 import de.optischa.teamspeak.utils.Config;
 import lombok.Getter;
+import org.json.simple.JSONObject;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.List;
@@ -79,17 +78,30 @@ public class ConsoleManager {
             for (ConsoleCommand consoleCommand : consoleCommands) {
                 commandList.put(consoleCommand.key().toLowerCase(), consoleCommand);
             }
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (InvocationTargetException e) {
-            e.printStackTrace();
-        } catch (InstantiationException e) {
+        } catch (IllegalAccessException | InvocationTargetException | InstantiationException e) {
             e.printStackTrace();
         }
     }
 
     public void startFurnishing(Config config) {
-        System.out.println(createQuestion("Das ist ein Test"));
+        JSONObject json = config.getConfig();
+        String host = createQuestion("Hostadress (127.0.0.1): ");
+        int hostport = 0;
+        try {
+            hostport = Integer.parseInt(createQuestion("Hostname port (9987): "));
+        } catch (NumberFormatException ignored) {
+
+        }
+        String username = createQuestion("Query Name (serveradmin): ");
+        String password = createQuestion("Query password (none): ");
+        String botname = createQuestion("Bot Name (Bot): ");
+        json.put("host", host.equalsIgnoreCase("") ? "127.0.0.1" : host);
+        json.put("hostport", hostport == 0 ? "9987" : hostport);
+        json.put("username", username.equalsIgnoreCase("") ? "serveradmin" : username);
+        json.put("password", password.equalsIgnoreCase("") ? "" : password);
+        json.put("name", botname.equalsIgnoreCase("") ? "Bot" : botname);
+        save(json, "config.json");
+
     }
 
     private String createQuestion(String question) {
@@ -101,5 +113,13 @@ public class ConsoleManager {
         } catch (IOException ignored) {
         }
         return input;
+    }
+
+    private void save(JSONObject jsonObject, String pathname) {
+        try (FileWriter file = new FileWriter(new File(pathname).getName())) {
+            file.append(jsonObject.toString());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
