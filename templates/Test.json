@@ -1,0 +1,130 @@
+{
+  "channels": [
+    {
+      "channelpropertys": [
+        {
+          "name": "channel_codec_quality",
+          "value": "6"
+        },
+        {
+          "name": "channel_description",
+          "value": ""
+        },
+        {
+          "name": "channel_flag_maxclients_unlimited",
+          "value": ""
+        },
+        {
+          "name": "channel_flag_permanent",
+          "value": "1"
+        },
+        {
+          "name": "channel_flag_semi_permanent",
+          "value": "0"
+        },
+        {
+          "name": "channel_maxclients",
+          "value": "-1"
+        },
+        {
+          "name": "channel_maxfamilyclients",
+          "value": "-1"
+        }
+      ],
+      "permissionpower": 0,
+      "channelname": "Test",
+      "maxclients": -1
+    },
+    {
+      "channelpropertys": [
+        {
+          "name": "channel_codec_quality",
+          "value": "6"
+        },
+        {
+          "name": "channel_description",
+          "value": ""
+        },
+        {
+          "name": "channel_flag_maxclients_unlimited",
+          "value": ""
+        },
+        {
+          "name": "channel_flag_permanent",
+          "value": "1"
+        },
+        {
+          "name": "channel_flag_semi_permanent",
+          "value": "0"
+        },
+        {
+          "name": "channel_maxclients",
+          "value": "-1"
+        },
+        {
+          "name": "channel_maxfamilyclients",
+          "value": "-1"
+        }
+      ],
+      "permissionpower": 0,
+      "channelname": "TestChannel",
+      "maxclients": -1
+    }
+  ],
+  "groups": [
+    {
+      "iconid": 0,
+      "savedb": 0,
+      "type": QUERY,
+      "groupname": "Guest Server Query"
+    },
+    {
+      "iconid": 500,
+      "savedb": 1,
+      "type": QUERY,
+      "groupname": "Admin Server Query"
+    },
+    {
+      "iconid": 300,
+      "savedb": 1,
+      "type": TEMPLATE,
+      "groupname": "Server Admin"
+    },
+    {
+      "iconid": 0,
+      "savedb": 1,
+      "type": TEMPLATE,
+      "groupname": "Normal"
+    },
+    {
+      "iconid": 0,
+      "savedb": 0,
+      "type": TEMPLATE,
+      "groupname": "Guest"
+    },
+    {
+      "iconid": 500,
+      "savedb": 1,
+      "type": QUERY,
+      "groupname": "Hoster"
+    },
+    {
+      "iconid": 300,
+      "savedb": 1,
+      "type": REGULAR,
+      "groupname": "Server Admin"
+    },
+    {
+      "iconid": 0,
+      "savedb": 1,
+      "type": REGULAR,
+      "groupname": "Normal"
+    },
+    {
+      "iconid": 0,
+      "savedb": 0,
+      "type": REGULAR,
+      "groupname": "Guest"
+    }
+  ]
+}

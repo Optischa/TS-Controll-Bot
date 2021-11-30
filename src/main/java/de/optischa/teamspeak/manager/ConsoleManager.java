@@ -62,9 +62,10 @@ public class ConsoleManager {
                         getLogger().log(Level.INFO, consoleCommand.key() + " | " + consoleCommand.description());
                     }
                 } else {
+                    String[] splitInput = input.split(" ");
                     for (ConsoleCommand consoleCommand : commandList.values()) {
-                        if(input.toLowerCase().equalsIgnoreCase(consoleCommand.key())) {
-                            consoleCommand.action(input.split(" "));
+                        if(splitInput[0].toLowerCase().equalsIgnoreCase(consoleCommand.key())) {
+                            consoleCommand.action(splitInput);
                         }
                     }
                 }
@@ -101,7 +102,6 @@ public class ConsoleManager {
         json.put("password", password.equalsIgnoreCase("") ? "" : password);
         json.put("name", botname.equalsIgnoreCase("") ? "Bot" : botname);
         save(json, "config.json");
-
     }
 
     private String createQuestion(String question) {
