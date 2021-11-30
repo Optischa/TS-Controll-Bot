@@ -46,9 +46,7 @@ public class Bot {
         consoleManager = new ConsoleManager();
         config = new Config();
         BotLogger logger = new BotLogger();
-
         logger.createFile();
-
         getConsoleManager().startConsole();
         if(!config.isExist()) {
             config.init();

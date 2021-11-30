@@ -35,6 +35,10 @@ public class BotLogger {
 	public void createFile() {
 		try {
 			File file = new File("logs/lastet.log");
+			File folder = new File("logs/");
+			if(!folder.exists()) {
+				folder.mkdir();
+			}
 			if(file.exists()) {
 				Path dirPath = Files.createTempDirectory("logs");
 				Path filePath = Files.createTempFile(dirPath, "lastet", ".log");
