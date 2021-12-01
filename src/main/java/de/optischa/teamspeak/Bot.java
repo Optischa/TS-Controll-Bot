@@ -12,6 +12,7 @@ import de.optischa.teamspeak.manager.ConsoleManager;
 import de.optischa.teamspeak.manager.EventRegisterManager;
 import de.optischa.teamspeak.utils.BotLogger;
 import de.optischa.teamspeak.utils.Config;
+import de.optischa.teamspeak.web.WebAPI;
 import lombok.Getter;
 
 import java.util.logging.Level;
@@ -48,6 +49,7 @@ public class Bot {
         BotLogger logger = new BotLogger();
         logger.createFile();
         getConsoleManager().startConsole();
+        new WebAPI().start();
         if(!config.isExist()) {
             config.init();
             getConsoleManager().startFurnishing(config);

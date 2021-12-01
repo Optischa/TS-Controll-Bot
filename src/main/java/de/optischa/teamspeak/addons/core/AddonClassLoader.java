@@ -38,6 +38,7 @@ public class AddonClassLoader extends URLClassLoader {
 				mainClass = findMain(file);
 				info = mainClass.getAnnotation(Addon.AddonInfo.class);
 			} catch(Throwable throwable) {
+				throwable.printStackTrace();
 				throw new InvalidAddonException("Can't find any main class");
 			}
 			
@@ -67,7 +68,7 @@ public class AddonClassLoader extends URLClassLoader {
 					}
 				}).filter(loadedClass -> Addon.class.isAssignableFrom(loadedClass))
 				.findFirst().orElseThrow((Supplier<Throwable>) () -> new IOException());
-		
+
 		jf.close();
 		
 		return cls;

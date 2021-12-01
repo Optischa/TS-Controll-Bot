@@ -16,6 +16,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Level;
 
 public class LoadTemplate {
 
@@ -28,22 +29,22 @@ public class LoadTemplate {
 
     public void loadTemplate(TS3Api ts3Api, String name) {
         File file = new File("templates/" + name + ".json");
-        if (file.exists()) {
-            for (Channel channel : ts3Api.getChannels()) {
-                if(!channel.isDefault()) {
-                    ts3Api.deleteChannel(channel.getId());
-                }
+        if (!file.exists()) {
+            logger.log(Level.WARNING, "No File with the name " + name + " in direction templates");
+            return;
+        }
+        for (Channel channel : ts3Api.getChannels()) {
+            if (!channel.isDefault()) {
+                ts3Api.deleteChannel(channel.getId());
             }
-            try {
-                JSONParser parser = new JSONParser();
-                Object obj = parser.parse(new FileReader("templates/" + file.getName()));
-                JSONObject jsonObject = (JSONObject) obj;
-                loadChannels((JSONArray) jsonObject.get("channels"), ts3Api);
-            } catch (IOException | ParseException e) {
-                e.printStackTrace();
-            }
-        } else {
-
+        }
+        try {
+            JSONParser parser = new JSONParser();
+            Object obj = parser.parse(new FileReader("templates/" + file.getName()));
+            JSONObject jsonObject = (JSONObject) obj;
+            loadChannels((JSONArray) jsonObject.get("channels"), ts3Api);
+        } catch (IOException | ParseException e) {
+            e.printStackTrace();
         }
     }
 
@@ -53,11 +54,6 @@ public class LoadTemplate {
                 JSONObject jsonObject = (JSONObject) object;
                 Map<ChannelProperty, String> option = new HashMap();
                 JSONArray channelpropertys = (JSONArray) jsonObject.get("channelpropertys");
-                Map<ChannelProperty, String> properties = new HashMap<>();
-                properties.put(ChannelProperty.CHANNEL_FLAG_MAXCLIENTS_UNLIMITED, "1");
-                properties.put(ChannelProperty.CHANNEL_FLAG_SEMI_PERMANENT, "1");
-                properties.put(ChannelProperty.CHANNEL_MAXCLIENTS, "1");
-                properties.put(ChannelProperty.CHANNEL_DESCRIPTION, "Test");
                 for (Object channelProperty : channelpropertys) {
                     if (channelProperty instanceof JSONObject) {
                         JSONObject channelPropertyJSON = (JSONObject) channelProperty;
@@ -68,8 +64,6 @@ public class LoadTemplate {
                     }
                 }
                 String name = String.valueOf(jsonObject.get("channelname"));
-                System.out.println(name);
-                System.out.println(option);
                 ts3Api.createChannel(name, option);
             }
         }
