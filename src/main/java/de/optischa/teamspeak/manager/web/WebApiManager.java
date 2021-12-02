@@ -27,7 +27,6 @@ public class WebApiManager extends WebApiModule {
     private static final String baseUrlIdentifier = "/api/";
     @Override
     public void handleApiRequest(HttpExchange httpExchange, String url) {
-        System.out.println("[DEBUG]\t" + url);
         String subUrl = url.substring(url.indexOf(baseUrlIdentifier) + baseUrlIdentifier.length());
         if(subUrl.startsWith("/")) {
             subUrl = subUrl.substring(1);

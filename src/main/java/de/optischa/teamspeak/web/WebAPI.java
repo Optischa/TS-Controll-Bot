@@ -2,12 +2,14 @@ package de.optischa.teamspeak.web;
 
 import com.sun.net.httpserver.HttpServer;
 import de.optischa.teamspeak.manager.web.WebApiManager;
+import de.optischa.teamspeak.utils.BotLogger;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.net.InetSocketAddress;
 import java.rmi.AlreadyBoundException;
 import java.util.List;
+import java.util.logging.Level;
 
 public class WebAPI {
     private boolean isRunning = false;
@@ -21,6 +23,8 @@ public class WebAPI {
                 e.printStackTrace();
             }
         }
+
+        BotLogger logger = new BotLogger();
 
 
         try {
@@ -38,7 +42,7 @@ public class WebAPI {
         server.createContext("/api/", WebApiManager.getInstance());
         server.start();
 
-        System.out.println("WebAPI start");
+        logger.log(Level.INFO, "WebAPI start");
 
         List<WebApiModule> apiModules = null;
         try {

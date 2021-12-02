@@ -6,6 +6,7 @@ import org.json.simple.JSONObject;
 public class ServerManager {
 
     private final TS3Api ts3Api;
+    private int rCode;
 
     public ServerManager(TS3Api ts3Api) {
         this.ts3Api = ts3Api;
@@ -25,7 +26,12 @@ public class ServerManager {
         json.put("clientsonline", ts3Api.getServerInfo().getClientsOnline());
         json.put("clientsmax", ts3Api.getServerInfo().getMaxClients());
         json.put("totalpacketloss", ts3Api.getServerInfo().getTotalPacketloss());
+        json.put("name", ts3Api.getServerInfo().getName());
+        rCode = 200;
         return json.toJSONString();
     }
 
+    public int getrCode() {
+        return rCode;
+    }
 }

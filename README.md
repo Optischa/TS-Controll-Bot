@@ -49,7 +49,7 @@ public class ExampleAddon extends Addon {
 }
 ```
 
-####Command
+###Command
 
 ```java
 public class ExampleCommand implements ChatCommand {
@@ -76,5 +76,32 @@ public class ExampleCommand implements ChatCommand {
     }
 }
 ```
+
+###Register Command
+
+```java
+public class ExampleAddon extends Addon {
+
+    // ...
+
+    @Override
+        public void onEnable() {
+            // ...
+            registerCommand(new ExampleCommand());
+        }
+
+}
+```
+
+##Rest API
+
+| URL | Method | Description |
+| ------------- | ------- |--------------------- |
+| `/api/channel` | `GET` | Display all channel form teamspeak |
+| `/api/channel` | `POST` | Create new channel |
+| `/api/channel` | `DELETE` | Delete channel with `channelid`|
+| `/api/server` | `GET` | Get all information of the Server |
+| `/api/client` | `GET` | Get all online Clients with information's |
+
 
 ##Download

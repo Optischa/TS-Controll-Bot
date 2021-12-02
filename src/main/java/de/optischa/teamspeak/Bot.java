@@ -13,25 +13,22 @@ import de.optischa.teamspeak.manager.EventRegisterManager;
 import de.optischa.teamspeak.utils.BotLogger;
 import de.optischa.teamspeak.utils.Config;
 import de.optischa.teamspeak.web.WebAPI;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 import java.util.logging.Level;
 
+@Getter
+@EqualsAndHashCode
 public class Bot {
 
     @Getter
     private static Bot bot;
-    @Getter
     private final TS3Config ts3Config;
-    @Getter
     private final TS3Query ts3Query;
-    @Getter
     private final TS3Api ts3Api;
-    @Getter
     private final Config config;
-    @Getter
     private final CommandManager commandManager;
-    @Getter
     private final ConsoleManager consoleManager;
 
     public static void main(String[] args) {
@@ -67,7 +64,7 @@ public class Bot {
         try {
             ts3Api.login((String) config.getConfig().get("username"), (String) config.getConfig().get("password"));
         } catch (TS3CommandFailedException e) {
-            logger.log(Level.WARNING, "Login has a error. Please check the config");
+            logger.log(Level.SEVERE, "Login has a error. Please check the config");
         }
         ts3Api.selectVirtualServerByPort(Integer.parseInt(String.valueOf(config.getConfig().get("hostport"))));
         try {

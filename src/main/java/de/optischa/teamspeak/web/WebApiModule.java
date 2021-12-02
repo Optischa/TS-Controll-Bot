@@ -13,7 +13,6 @@ public abstract class WebApiModule implements HttpHandler {
         try {
             String method = httpExchange.getRequestMethod();
             String url = httpExchange.getRequestURI().toString();
-            System.out.println(method + "\t" + url);
 
             handleApiRequest(httpExchange,url);
         } catch (Exception e) {
@@ -21,11 +20,11 @@ public abstract class WebApiModule implements HttpHandler {
         }
     }
 
-    protected void sendResponse(HttpExchange exchange, String response) {
+    protected void sendResponse(HttpExchange exchange, String response, int rCode) {
         try {
             byte[] bs = response.getBytes(StandardCharsets.UTF_8);
             exchange.getResponseHeaders().set("Content-Type", "application/json");
-            exchange.sendResponseHeaders(200, bs.length);
+            exchange.sendResponseHeaders(rCode, bs.length);
             OutputStream os = exchange.getResponseBody();
             os.write(bs);
             os.close();
@@ -41,7 +40,5 @@ public abstract class WebApiModule implements HttpHandler {
 
     public abstract boolean canHandle(String url);
     public abstract void handleApiRequest(HttpExchange httpExchange, String url);
-
-  
 
 }

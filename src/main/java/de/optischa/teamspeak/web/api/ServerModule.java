@@ -6,7 +6,7 @@ import de.optischa.teamspeak.Bot;
 import de.optischa.teamspeak.manager.web.ServerManager;
 import de.optischa.teamspeak.web.WebApiModule;
 
-public class ServerAPI extends WebApiModule {
+public class ServerModule extends WebApiModule {
 
     @Override
     public boolean canHandle(String url) {
@@ -19,7 +19,7 @@ public class ServerAPI extends WebApiModule {
         TS3Api ts3Api = Bot.getBot().getTs3Api();
         ServerManager serverManager = new ServerManager(ts3Api);
         if(method.equalsIgnoreCase("get")) {
-            sendResponse(httpExchange, serverManager.getServerInfo());
+            sendResponse(httpExchange, serverManager.getServerInfo(), serverManager.getrCode());
         }
     }
 

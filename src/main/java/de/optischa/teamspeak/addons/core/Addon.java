@@ -1,8 +1,10 @@
 package de.optischa.teamspeak.addons.core;
 
+import com.github.theholywaffle.teamspeak3.TS3Api;
 import com.github.theholywaffle.teamspeak3.api.event.TS3EventAdapter;
 import de.optischa.teamspeak.Bot;
 import de.optischa.teamspeak.commands.chat.ChatCommand;
+import de.optischa.teamspeak.commands.console.ConsoleCommand;
 import lombok.*;
 
 import java.io.File;
@@ -44,6 +46,14 @@ public abstract class Addon {
 	public void registerEventListener(TS3EventAdapter ts3EventAdapter) {
 		Bot.getBot().getTs3Api().addTS3Listeners(ts3EventAdapter);
 	};
+
+	public TS3Api getTS3Api() {
+		return Bot.getBot().getTs3Api();
+	}
+
+	public void registerConsoleCommand(ConsoleCommand consoleCommand) {
+		Bot.getBot().getConsoleManager().registerCommands(consoleCommand);
+	}
 	
 	public abstract void onEnable();
 	

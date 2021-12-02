@@ -73,6 +73,10 @@ public class ConsoleManager {
         }).start();
     }
 
+    public void registerCommands(ConsoleCommand consoleCommand) {
+        commandList.put(consoleCommand.key().toLowerCase(), consoleCommand);
+    }
+
     public void loadCommands() {
         try {
             List<ConsoleCommand> consoleCommands = CommandsReflectionHelper.load("de.optischa.teamspeak.commands.console", ConsoleCommand.class, false);

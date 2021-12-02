@@ -4,12 +4,17 @@ import com.github.theholywaffle.teamspeak3.TS3Api;
 import com.github.theholywaffle.teamspeak3.api.ChannelProperty;
 import com.github.theholywaffle.teamspeak3.api.exception.TS3CommandFailedException;
 import com.github.theholywaffle.teamspeak3.api.wrapper.Channel;
+import de.optischa.teamspeak.web.gson.ChannelProperties;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class ChannelManager {
 
     private final TS3Api ts3Api;
+    private int rCode;
 
     public ChannelManager(TS3Api ts3Api) {
         this.ts3Api = ts3Api;
@@ -34,6 +39,7 @@ public class ChannelManager {
             channelArray.add(jsonObject);
         }
         json.put("channels", channelArray);
+        rCode = 200;
         return json.toJSONString();
     }
 
@@ -42,19 +48,39 @@ public class ChannelManager {
         try {
             ts3Api.deleteChannel(channelid);
             json.put("status", "successful");
+            rCode = 200;
         } catch (TS3CommandFailedException e) {
             json.put("status", "error");
             json.put("message", "There is no channel with the id " + channelid);
+            rCode = 500;
         }
         return json.toJSONString();
     }
 
-    public String createChannel(String name) {
+    public String createChannel(String name, ChannelProperties[] channelProperties) {
+        Map<ChannelProperty, String> options = new HashMap<>();
+        for(ChannelProperties channelPropertie : channelProperties) {
+            ChannelProperty channelProperty = ChannelProperty.valueOf(channelPropertie.getName());
+            if (channelPropertie.getName().equalsIgnoreCase("CHANNEL_FLAG_MAXCLIENTS_UNLIMITED") || channelPropertie.getName().equalsIgnoreCase("CHANNEL_FLAG_SEMI_PERMANENT") || channelPropertie.getName().equalsIgnoreCase("CHANNEL_MAXCLIENTS") || channelPropertie.getName().equalsIgnoreCase("CHANNEL_DESCRIPTION") || channelPropertie.getName().equalsIgnoreCase("channel_flag_permanent") || channelPropertie.getName().equalsIgnoreCase("channel_password") && !String.valueOf(channelPropertie.getValue()).equalsIgnoreCase("") || channelPropertie.getName().equalsIgnoreCase("channel_maxfamilyclients") || channelPropertie.getName().equalsIgnoreCase("CHANNEL_CODEC_QUALITY") || channelPropertie.getName().equalsIgnoreCase("CHANNEL_DELETE_DELAY") && !String.valueOf(channelPropertie.getValue()).equalsIgnoreCase("")) {
+                options.put(channelProperty, channelPropertie.getValue());
+            }
+        }
         JSONObject json = new JSONObject();
 
-
-
+        try {
+            int channelId = ts3Api.createChannel(name, options);
+            json.put("status", "successful");
+            json.put("channelid", channelId);
+            rCode = 200;
+        } catch (TS3CommandFailedException e) {
+            json.put("status", "error");
+            json.put("message", e.getMessage());
+            rCode = 500;
+        }
         return json.toJSONString();
     }
 
+    public int getrCode() {
+        return rCode;
+    }
 }
