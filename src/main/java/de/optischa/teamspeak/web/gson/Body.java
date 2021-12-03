@@ -31,4 +31,16 @@ public class Body {
     public String getFunction() {
         return function;
     }
+
+    // bans
+    private String banreason;
+    private int banid;
+
+    public int getBanid() {
+        return banid;
+    }
+
+    public String getBanreason() {
+        return banreason;
+    }
 }

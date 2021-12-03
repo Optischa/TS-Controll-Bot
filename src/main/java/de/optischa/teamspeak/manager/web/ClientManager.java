@@ -1,7 +1,9 @@
 package de.optischa.teamspeak.manager.web;
 
 import com.github.theholywaffle.teamspeak3.TS3Api;
+import com.github.theholywaffle.teamspeak3.api.exception.TS3CommandFailedException;
 import com.github.theholywaffle.teamspeak3.api.wrapper.Client;
+import de.optischa.teamspeak.web.gson.Body;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
@@ -38,6 +40,7 @@ public class ClientManager {
             jsonObject.put("servergroups", jsonArray);
             json.add(jsonObject);
         }
+        rCode = 200;
         return json.toJSONString();
     }
 
@@ -45,8 +48,34 @@ public class ClientManager {
         return rCode;
     }
 
-    public String manageClient(String function, int clientId) {
+    public String manageClient(String function, int clientId, Body body) {
         JSONObject jsonObject = new JSONObject();
+
+        if(function.equalsIgnoreCase("kickserver")) {
+            try {
+                ts3Api.kickClientFromServer(clientId);
+                jsonObject.put("status", "successful");
+            } catch (TS3CommandFailedException e) {
+                jsonObject.put("status", "error");
+                jsonObject.put("message", e.getMessage());
+            }
+        } else if (function.equalsIgnoreCase("kickchannel")) {
+            try {
+                ts3Api.kickClientFromChannel(clientId);
+                jsonObject.put("status", "successful");
+            } catch (TS3CommandFailedException e) {
+                jsonObject.put("status", "error");
+                jsonObject.put("message", e.getMessage());
+            }
+        } else if (function.equalsIgnoreCase("ban")) {
+            try {
+                ts3Api.banClient(clientId, body.getBanreason());
+                jsonObject.put("status", "successful");
+            } catch (TS3CommandFailedException e) {
+                jsonObject.put("status", "error");
+                jsonObject.put("message", e.getMessage());
+            }
+        }
 
         return jsonObject.toJSONString();
     }
