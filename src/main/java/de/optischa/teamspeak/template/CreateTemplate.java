@@ -68,7 +68,7 @@ public class CreateTemplate {
             jsonObject.put("type", String.valueOf(serverGroup.getType()));
             jsonObject.put("iconid", serverGroup.getIconId());
             jsonObject.put("savedb", serverGroup.getSaveDb());
-            jsonObject.put("type", serverGroup.getType());
+            jsonObject.put("type", String.valueOf(serverGroup.getType()));
             serverGroups.add(jsonObject);
         }
         return serverGroups;

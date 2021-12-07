@@ -5,5 +5,6 @@
   "supporterjoinsupport": "Du darftst den Support nicht beigetreten",
   "supportnotification": "Es wurden %counter% Supporter benachrichtig",
   "welcomemessage": "Willkommen auf den Server",
-  "kickname": "Du wurdest gekickt, da in dein Namen das Wort %blackname% vorkam"
+  "kickname": "Du wurdest gekickt, da in dein Namen das Wort %blackname% vorkam",
+  "weathermessage": "Die Temperatur in %city% beträgt gerade %temp%°C und fühlt sich an wie %feelingtemp%°C. Heute gibt es eine Maximaltemperatur von %maxtemp%°C und eine Minimale Temperatur von %mintemp%°C."
 }

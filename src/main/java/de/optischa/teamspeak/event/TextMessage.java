@@ -24,7 +24,7 @@ public class TextMessage extends TS3EventAdapter {
         try {
             if (textMessageEvent.getMessage().startsWith((String) config.get("prefix"))) {
                 try {
-                    bot.getCommandManager().getCommandHelper().handleCommand(bot.getCommandManager().getCommandParser().parser(textMessageEvent.getMessage()), bot.getTs3Api().getClientInfo(textMessageEvent.getTargetClientId()));
+                    bot.getCommandManager().getCommandHelper().handleCommand(bot.getCommandManager().getCommandParser().parser(textMessageEvent.getMessage()), bot.getTs3Api().getClientInfo(textMessageEvent.getInvokerId()));
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }

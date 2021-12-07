@@ -28,6 +28,7 @@ public class CommandManager {
 
     public void loadCommands() {
         try {
+
             List<ChatCommand> chatCommands = CommandsReflectionHelper.load("de.optischa.teamspeak.commands.chat", ChatCommand.class,false);
             for (ChatCommand chatCommand : chatCommands) {
                 getCommandHelper().commands.put(chatCommand.name().toLowerCase(), chatCommand);

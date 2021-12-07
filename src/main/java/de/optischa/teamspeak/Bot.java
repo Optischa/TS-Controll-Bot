@@ -57,7 +57,7 @@ public class Bot {
             try {
                 ts3Query.connect();
             } catch (TS3ConnectionFailedException e) {
-                logger.log(Level.WARNING, "No connection to Server with Adress " + config.getConfig().get("host"));
+                logger.log(Level.WARNING, "No connection to Server with Adresse " + config.getConfig().get("host"));
             }
         }
 

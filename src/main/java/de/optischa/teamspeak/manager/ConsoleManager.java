@@ -90,16 +90,16 @@ public class ConsoleManager {
 
     public void startFurnishing(Config config) {
         JSONObject json = config.getConfig();
-        String host = createQuestion("Hostadress (127.0.0.1): ");
+        String host = createQuestion("Hostadress (127.0.0.1)");
         int hostport = 0;
         try {
-            hostport = Integer.parseInt(createQuestion("Hostname port (9987): "));
+            hostport = Integer.parseInt(createQuestion("Hostname port (9987)"));
         } catch (NumberFormatException ignored) {
 
         }
-        String username = createQuestion("Query Name (serveradmin): ");
-        String password = createQuestion("Query password (none): ");
-        String botname = createQuestion("Bot Name (Bot): ");
+        String username = createQuestion("Query Name (serveradmin)");
+        String password = createQuestion("Query password (none)");
+        String botname = createQuestion("Bot Name (Bot)");
         json.put("host", host.equalsIgnoreCase("") ? "127.0.0.1" : host);
         json.put("hostport", hostport == 0 ? "9987" : hostport);
         json.put("username", username.equalsIgnoreCase("") ? "serveradmin" : username);
