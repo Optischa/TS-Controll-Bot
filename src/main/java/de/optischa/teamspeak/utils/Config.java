@@ -74,8 +74,12 @@ public class Config {
         supportgroupid.add("");
         configArrayBuilder.add("backlistchannel", backlistchannel);
 
+        JsonArrayBuilder whitelistIp = Json.createArrayBuilder();
+
         builder.add("configs", configArrayBuilder);
+        builder.add("whitelistip", whitelistIp);
         JsonObject jo = builder.build();
+
         try {
             FileWriter fw = new FileWriter(file.getName());
             JsonWriter jsonWriter = Json.createWriter(fw);

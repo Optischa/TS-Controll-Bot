@@ -4,6 +4,7 @@ import com.github.theholywaffle.teamspeak3.api.event.ClientJoinEvent;
 import com.github.theholywaffle.teamspeak3.api.event.TS3EventAdapter;
 import de.optischa.teamspeak.Bot;
 import de.optischa.teamspeak.function.AntiRecordingFunction;
+import de.optischa.teamspeak.function.AntiVPNFunction;
 import de.optischa.teamspeak.function.EditChannelFunction;
 import de.optischa.teamspeak.function.WelcomeFunction;
 import de.optischa.teamspeak.utils.Config;
@@ -26,6 +27,7 @@ public class ClientJoin extends TS3EventAdapter {
         new EditChannelFunction().userCounter(message, config, bot);
         new WelcomeFunction(bot, clientJoinEvent.getClientId());
         new AntiRecordingFunction().antiRecording(clientJoinEvent.isClientRecording(), config, bot.getTs3Api(), clientJoinEvent.getClientId(), message);
+        new AntiVPNFunction(bot, config).check(bot.getTs3Api().getClientInfo(clientJoinEvent.getClientId()));
     }
 
 }
