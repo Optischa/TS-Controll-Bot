@@ -77,7 +77,7 @@ public class ExampleCommand implements ChatCommand {
 }
 ```
 
-###Register Command
+### Register Command
 
 ```java
 public class ExampleAddon extends Addon {
@@ -93,7 +93,7 @@ public class ExampleAddon extends Addon {
 }
 ```
 
-##Rest API
+## Rest API
 
 | URL | Method | Description |
 | ------------- | ------- |--------------------- |
@@ -104,4 +104,4 @@ public class ExampleAddon extends Addon {
 | `/api/client` | `GET` | Get all online Clients with information's |
 
 
-##Download
+## Download
