@@ -13,9 +13,13 @@ import de.optischa.teamspeak.manager.EventRegisterManager;
 import de.optischa.teamspeak.utils.BotLogger;
 import de.optischa.teamspeak.utils.Config;
 import de.optischa.teamspeak.web.WebAPI;
+import de.optischa.teamspeak.web.WebApiModule;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.Setter;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 
 @Getter
@@ -30,6 +34,7 @@ public class Bot {
     private final Config config;
     private final CommandManager commandManager;
     private final ConsoleManager consoleManager;
+    private List<WebApiModule> webApiModules;
 
     public static void main(String[] args) {
         new Bot();
@@ -43,10 +48,10 @@ public class Bot {
         commandManager = new CommandManager();
         consoleManager = new ConsoleManager();
         config = new Config();
+        webApiModules = new ArrayList<>();
         BotLogger logger = new BotLogger();
         logger.createFile();
         getConsoleManager().startConsole();
-        new WebAPI().start();
         if(!config.isExist()) {
             config.init();
             getConsoleManager().startFurnishing(config);
@@ -74,6 +79,7 @@ public class Bot {
         }
 
         new AddonCore().enable();
+        new WebAPI().start(getWebApiModules());
         try {
             ts3Api.registerAllEvents();
             new EventRegisterManager(ts3Api).registerEvents();

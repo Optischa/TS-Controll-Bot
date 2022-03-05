@@ -1,6 +1,7 @@
 # Project exclude paths
 /target/
 .idea
+templates
 addons
 config.json
 message.json

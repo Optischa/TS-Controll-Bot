@@ -5,6 +5,7 @@ import com.github.theholywaffle.teamspeak3.api.event.TS3EventAdapter;
 import de.optischa.teamspeak.Bot;
 import de.optischa.teamspeak.commands.chat.ChatCommand;
 import de.optischa.teamspeak.commands.console.ConsoleCommand;
+import de.optischa.teamspeak.web.WebApiModule;
 import lombok.*;
 
 import java.io.File;
@@ -42,6 +43,10 @@ public abstract class Addon {
 	public void registerChatCommand(ChatCommand chatCommand) {
 		Bot.getBot().getCommandManager().getCommandHelper().commands.put(chatCommand.name(), chatCommand);
 	};
+
+	public void registerWebAPIModule(WebApiModule webApiModule) {
+		Bot.getBot().getWebApiModules().add(webApiModule);
+	}
 
 	public void registerEventListener(TS3EventAdapter ts3EventAdapter) {
 		Bot.getBot().getTs3Api().addTS3Listeners(ts3EventAdapter);

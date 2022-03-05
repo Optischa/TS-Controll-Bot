@@ -1,11 +1,11 @@
-#Teamspeak-Bot
+# Teamspeak-Bot
 
 1. [Creating a Addon](#addon) 
    1. [Command](#command)
 2. [Downloading Bot](#download)
 
 
-##Addon
+## Addon
 
 Creating Addon for the Teamspeak Bot.
 
@@ -49,7 +49,7 @@ public class ExampleAddon extends Addon {
 }
 ```
 
-###Command
+### Command
 
 ```java
 public class ExampleCommand implements ChatCommand {

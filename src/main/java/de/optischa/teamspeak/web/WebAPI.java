@@ -15,7 +15,7 @@ public class WebAPI {
     private boolean isRunning = false;
     private HttpServer server;
 
-    public void start() {
+    public void start(List<WebApiModule> webApiModules) {
         if(isRunning){
             try {
                 throw new AlreadyBoundException();
@@ -47,15 +47,19 @@ public class WebAPI {
         List<WebApiModule> apiModules = null;
         try {
             apiModules = ModuleReflectionHelper.load("de.optischa.teamspeak.web.api", WebApiModule.class,false);
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (InvocationTargetException e) {
-            e.printStackTrace();
-        } catch (InstantiationException e) {
+        } catch (IllegalAccessException | InvocationTargetException | InstantiationException e) {
             e.printStackTrace();
         }
         WebApiManager apiManager = WebApiManager.getInstance();
         for (WebApiModule apiModule : apiModules) {
+            try {
+                apiManager.addModule(apiModule);
+            } catch (AlreadyBoundException e) {
+                e.printStackTrace();
+            }
+        }
+
+        for (WebApiModule apiModule : webApiModules) {
             try {
                 apiManager.addModule(apiModule);
             } catch (AlreadyBoundException e) {
@@ -71,7 +75,6 @@ public class WebAPI {
     public void stop(){
         if(server == null)
             return;
-
 
         server.stop(5000);
 

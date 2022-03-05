@@ -18,6 +18,7 @@ public class Schleuder {
         AFKFunction afkFunction = new AFKFunction(Bot.getBot());
         CheckNameFunction checkNameFunction = new CheckNameFunction();
         AntiRecordingFunction antiRecordingFunction = new AntiRecordingFunction();
+        ChannelTimeFunction channelTimeFunction = new ChannelTimeFunction(Bot.getBot());
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
@@ -41,8 +42,11 @@ public class Schleuder {
                         checkNameFunction.check(channel, json, ts3Api);
                     }
                 }
+                if ((Boolean) json.get("channel-timer")) {
+                    channelTimeFunction.start(config);
+                }
             }
-        }, 1000, 5000);
+        }, 1000, 1000);
     }
 
 }
